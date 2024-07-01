@@ -1,13 +1,14 @@
 package org.fianancetracker.backend.util;
 
+import org.fianancetracker.backend.dto.CategoryDTO;
 import org.fianancetracker.backend.dto.UserDTO;
 
 public class Validation {
 
+    protected static String message = "";
 
     public static String userRegistrationValidate(UserDTO userDTO) {
 
-        String message = "";
 
         if (userDTO.getFirstName().isEmpty() || userDTO.getFirstName() == null) {
             return MessageVarList.FIRST_NAME_EMPTY;
@@ -29,7 +30,6 @@ public class Validation {
 
     public static String userLoginValidate(UserDTO userDTO) {
 
-        String message = "";
         if (userDTO.getEmail().isEmpty() || userDTO.getEmail() == null) {
             return MessageVarList.EMAIL_EMPTY;
         } else if (userDTO.getPassword().isEmpty() || userDTO.getPassword() == null) {
@@ -37,6 +37,15 @@ public class Validation {
         } else {
             return message;
         }
+    }
 
+    public static String categoryValidation(CategoryDTO categoryDTO) {
+        if (categoryDTO.getDescription().isEmpty() || categoryDTO.getDescription() == null) {
+            return MessageVarList.EMPTY_CATEGORY;
+        } else if (categoryDTO.getType().isEmpty() || categoryDTO.getType() == null) {
+            return MessageVarList.EMPTY_CATEGORY_TYPE;
+        } else {
+            return message;
+        }
     }
 }

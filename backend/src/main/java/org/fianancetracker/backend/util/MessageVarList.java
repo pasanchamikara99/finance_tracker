@@ -12,4 +12,6 @@ public class MessageVarList {
     public static final String NO_USER = "No User Found";
     public static final String INVALID_lOGIN = "Invalid Login";
     public static final String VALID_lOGIN = "valid Login";
+    public static final String EMPTY_CATEGORY = "Category Description Cannot be Empty";
+    public static final String EMPTY_CATEGORY_TYPE = "Category Type Cannot be Empty";
 }
