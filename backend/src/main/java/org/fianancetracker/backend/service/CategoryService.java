@@ -1,9 +1,11 @@
 package org.fianancetracker.backend.service;
 
 import org.fianancetracker.backend.dto.CategoryDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface CategoryService {
 
     String addCategory(CategoryDTO categoryDTO);
