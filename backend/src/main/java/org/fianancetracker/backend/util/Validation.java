@@ -29,10 +29,9 @@ public class Validation {
     }
 
     public static String userLoginValidate(UserDTO userDTO) {
-
-        if (userDTO.getEmail().isEmpty() || userDTO.getEmail() == null) {
+        if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
             return MessageVarList.EMAIL_EMPTY;
-        } else if (userDTO.getPassword().isEmpty() || userDTO.getPassword() == null) {
+        } else if (userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
             return MessageVarList.PASSWORD_EMPTY;
         } else {
             return message;
@@ -40,9 +39,9 @@ public class Validation {
     }
 
     public static String categoryValidation(CategoryDTO categoryDTO) {
-        if (categoryDTO.getDescription().isEmpty() || categoryDTO.getDescription() == null) {
+        if (categoryDTO.getDescription() == null || categoryDTO.getDescription().isEmpty()) {
             return MessageVarList.EMPTY_CATEGORY;
-        } else if (categoryDTO.getType().isEmpty() || categoryDTO.getType() == null) {
+        } else if (categoryDTO.getType() == null || categoryDTO.getType().isEmpty()) {
             return MessageVarList.EMPTY_CATEGORY_TYPE;
         } else {
             return message;
