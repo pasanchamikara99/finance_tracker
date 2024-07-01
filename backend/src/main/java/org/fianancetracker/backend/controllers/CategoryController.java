@@ -82,4 +82,20 @@ public class CategoryController {
 
     }
 
+    @DeleteMapping("/deleteCategory/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deteleCategory(@PathVariable("id") Long id) {
+        log.info(this.getClass().getName() + "Delete Category");
+        log.info(this.getClass().getName() + "Get Category");
+        String message = "";
+
+        message = categoryService.deleteCategory(id);
+        if (message.isEmpty()) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 }
