@@ -86,4 +86,20 @@ public class CategoryServiceImpl implements CategoryService {
 
         return new ArrayList<>();
     }
+
+    @Override
+    public String deleteCategory(Long id) {
+        String message = "";
+        Optional<Category> categoryOptional = categoryRepository.findById(id);
+        if (categoryOptional.isPresent()) {
+            try {
+                categoryRepository.delete(categoryOptional.get());
+            } catch (Exception e) {
+                e.getMessage();
+            }
+        } else {
+            message = "No Category Found";
+        }
+        return message;
+    }
 }
