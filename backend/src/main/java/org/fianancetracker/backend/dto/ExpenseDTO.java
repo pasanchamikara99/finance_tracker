@@ -10,9 +10,9 @@ import java.sql.Date;
 public class ExpenseDTO {
 
     private Long id;
-    private Long userId;
+    private String userId;
     private String description;
     private Long amount;
-    private String type;
+    private Long type;
     private Date date;
 }

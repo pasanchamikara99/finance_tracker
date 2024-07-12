@@ -17,8 +17,9 @@ public class Expense {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "type")
-    private String type;
+    @ManyToOne
+    @JoinColumn(name = "type", nullable = false)
+    private Category type;
 
     @Column(name = "amount")
     private Long amount;
@@ -27,7 +28,7 @@ public class Expense {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false , referencedColumnName = "user_name")
     private User user;
 
 }

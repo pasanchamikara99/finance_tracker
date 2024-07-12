@@ -52,7 +52,7 @@ public class Validation {
     public static String expenseValidation(ExpenseDTO expenseDTO) {
         if (expenseDTO.getDescription() == null || expenseDTO.getDescription().isEmpty()) {
             return MessageVarList.EMPTY_EXPENSE_DESCRIPTION;
-        } else if (expenseDTO.getType() == null || expenseDTO.getType().isEmpty()) {
+        } else if (expenseDTO.getType() == null) {
             return MessageVarList.EMPTY_EXPENSE_TYPE;
         } else if (expenseDTO.getAmount() == null) {
             return MessageVarList.EMPTY_EXPENSE_AMOUNT;
