@@ -1,6 +1,7 @@
 package org.fianancetracker.backend.util;
 
 import org.fianancetracker.backend.dto.CategoryDTO;
+import org.fianancetracker.backend.dto.ExpenseDTO;
 import org.fianancetracker.backend.dto.UserDTO;
 
 public class Validation {
@@ -43,6 +44,18 @@ public class Validation {
             return MessageVarList.EMPTY_CATEGORY;
         } else if (categoryDTO.getType() == null || categoryDTO.getType().isEmpty()) {
             return MessageVarList.EMPTY_CATEGORY_TYPE;
+        } else {
+            return message;
+        }
+    }
+
+    public static String expenseValidation(ExpenseDTO expenseDTO) {
+        if (expenseDTO.getDescription() == null || expenseDTO.getDescription().isEmpty()) {
+            return MessageVarList.EMPTY_EXPENSE_DESCRIPTION;
+        } else if (expenseDTO.getType() == null || expenseDTO.getType().isEmpty()) {
+            return MessageVarList.EMPTY_EXPENSE_TYPE;
+        } else if (expenseDTO.getAmount() == null) {
+            return MessageVarList.EMPTY_EXPENSE_AMOUNT;
         } else {
             return message;
         }

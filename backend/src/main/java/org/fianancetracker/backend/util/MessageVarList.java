@@ -14,4 +14,7 @@ public class MessageVarList {
     public static final String VALID_lOGIN = "valid Login";
     public static final String EMPTY_CATEGORY = "Category Description Cannot be Empty";
     public static final String EMPTY_CATEGORY_TYPE = "Category Type Cannot be Empty";
+    public static final String EMPTY_EXPENSE_DESCRIPTION = "Expense Description Cannot be Empty";
+    public static final String EMPTY_EXPENSE_TYPE = "Expense Type Cannot be Empty";
+    public static final String EMPTY_EXPENSE_AMOUNT = "Expense Amount Cannot be Empty";
 }

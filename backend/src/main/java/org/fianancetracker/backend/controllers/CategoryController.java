@@ -86,7 +86,7 @@ public class CategoryController {
     @ResponseBody
     public ResponseEntity<String> deteleCategory(@PathVariable("id") Long id) {
         log.info(this.getClass().getName() + "Delete Category");
-        log.info(this.getClass().getName() + "Get Category");
+
         String message = "";
 
         message = categoryService.deleteCategory(id);
@@ -94,6 +94,21 @@ public class CategoryController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @GetMapping("/getCategoryByType/{type}")
+    @ResponseBody
+    public ResponseEntity<List<CategoryDTO>> deteleCategory(@PathVariable("type") String type) {
+        log.info(this.getClass().getName() + "Get Category by types");
+        List<CategoryDTO> category = null;
+
+        category = categoryService.getCategoryByType(type);
+        if (!category.isEmpty()) {
+            return new ResponseEntity<>(category, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(category, HttpStatus.BAD_REQUEST);
         }
 
     }

@@ -102,4 +102,20 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return message;
     }
+
+    @Override
+    public List<CategoryDTO> getCategoryByType(String type) {
+        List<Category> categories = categoryRepository.findByType(type);
+
+        if (!categories.isEmpty()) {
+            return categories.stream()
+                    .map(category -> new CategoryDTO(
+                            category.getId(),
+                            category.getDescription(),
+                            category.getType()))
+                    .collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
+    }
 }
