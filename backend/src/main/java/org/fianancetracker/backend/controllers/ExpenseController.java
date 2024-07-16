@@ -6,10 +6,9 @@ import org.fianancetracker.backend.service.ExpenseService;
 import org.fianancetracker.backend.util.Validation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -35,6 +34,17 @@ public class ExpenseController {
             return new ResponseEntity<>("Expense Added Successfully", HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/getAllExpenses/{username}")
+    public ResponseEntity<List<ExpenseDTO>> getAllExpense(@PathVariable("username") String username) {
+        log.info(this.getClass().getName() + "get All Expense");
+        List<ExpenseDTO> expense = expenseService.getAllExpense(username);
+        if (expense.isEmpty()) {
+            return new ResponseEntity<>(expense, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(expense, HttpStatus.FOUND);
         }
     }
 

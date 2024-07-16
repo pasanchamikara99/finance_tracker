@@ -3,9 +3,12 @@ package org.fianancetracker.backend.service.Impl;
 import org.fianancetracker.backend.dto.CategoryDTO;
 import org.fianancetracker.backend.models.Category;
 import org.fianancetracker.backend.repository.CategoryRepository;
+import org.fianancetracker.backend.repository.UserRepository;
 import org.fianancetracker.backend.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +19,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    private final UserRepository userRepository;
+
+    public CategoryServiceImpl(CategoryRepository categoryRepository, UserRepository userRepository) {
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -27,6 +33,9 @@ public class CategoryServiceImpl implements CategoryService {
             Category category = new Category();
             category.setDescription(categoryDTO.getDescription());
             category.setType(categoryDTO.getType());
+            LocalDate currentDate = LocalDate.now();
+            category.setDate(Date.valueOf(currentDate));
+            category.setUser(userRepository.findByUserName(categoryDTO.getUsername()));
             categoryRepository.save(category);
         } catch (Exception e) {
             message = e.getMessage();
@@ -80,6 +89,7 @@ public class CategoryServiceImpl implements CategoryService {
                     .map(category -> new CategoryDTO(
                             category.getId(),
                             category.getDescription(),
+                            category.getUser().getUserName(),
                             category.getType()))
                     .collect(Collectors.toList());
         }
@@ -112,6 +122,7 @@ public class CategoryServiceImpl implements CategoryService {
                     .map(category -> new CategoryDTO(
                             category.getId(),
                             category.getDescription(),
+                            category.getUser().getUserName(),
                             category.getType()))
                     .collect(Collectors.toList());
         }

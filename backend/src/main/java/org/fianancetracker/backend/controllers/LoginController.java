@@ -5,6 +5,7 @@ import org.fianancetracker.backend.dto.UserDTO;
 import org.fianancetracker.backend.service.UserService;
 import org.fianancetracker.backend.util.MessageVarList;
 import org.fianancetracker.backend.util.Validation;
+import org.fianancetracker.backend.webToken.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    JWTService jwtService = new JWTService();
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
@@ -44,9 +47,9 @@ public class LoginController {
         }
         message = userService.loginUser(userDTO);
         if (message.isEmpty()) {
-            return new ResponseEntity<>(MessageVarList.VALID_lOGIN, HttpStatus.CREATED);
+            return new ResponseEntity<>(jwtService.generateToken(userDTO), HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_GATEWAY);
     }
 
 
