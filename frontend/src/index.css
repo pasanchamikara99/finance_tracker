@@ -56,10 +56,9 @@ button {
 
 .balance {
   margin: 10px;
-  background-color: darkgreen;
   padding: 5px;
   color: white;
-  width: 100px;
+  width: 150px;
   text-align: center;
   border: none;
   border-radius: 10px;

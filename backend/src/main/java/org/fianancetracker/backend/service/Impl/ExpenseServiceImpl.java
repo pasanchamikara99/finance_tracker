@@ -68,6 +68,9 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         List<ExpenseDTO> expenseDTOList = new ArrayList<>();
 
+        long sumOfExpense = 0;
+        long sumOfIncome = 0;
+
         LocalDate currentDate = LocalDate.now();
         int currentMonth = currentDate.getMonthValue();
         int currentYear = currentDate.getYear();
@@ -77,15 +80,46 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         List<Object[]> results = expenseRepository.findExpenseByMonth(username, startDate, endDate);
 
+        List<Object[]> resultsIncome = expenseRepository.findIncomeByMonth(username, startDate, endDate);
+
+
         for (Object[] result : results) {
             ExpenseDTO expenseDTO = new ExpenseDTO();
             expenseDTO.setAmount((long) result[1]);
             expenseDTO.setTypeDescription((String) result[0]);
             expenseDTOList.add(expenseDTO);
+            sumOfExpense += (long) result[1];
         }
+
 
         return expenseDTOList;
 
+    }
+
+    @Override
+    public ExpenseDTO getBalance(String username) {
+        ExpenseDTO expenseDTO = new ExpenseDTO();
+        long sumOfExpense = 0;
+        long sumOfIncome = 0;
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonthValue();
+        int currentYear = currentDate.getYear();
+
+        LocalDate startDate = LocalDate.of(currentYear, currentMonth, 1);
+        LocalDate endDate = LocalDate.of(currentYear, currentMonth, 30);
+        List<Object[]> results = expenseRepository.findExpenseByMonth(username, startDate, endDate);
+        List<Object[]> resultsIncome = expenseRepository.findIncomeByMonth(username, startDate, endDate);
+
+        for (Object[] result : results) {
+            sumOfExpense += (long) result[1];
+        }
+
+        for (Object[] result : resultsIncome) {
+            sumOfIncome += (long) result[1];
+        }
+        expenseDTO.setBalance(sumOfIncome - sumOfExpense);
+
+        return expenseDTO;
     }
 
 }

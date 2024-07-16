@@ -15,6 +15,7 @@ public class ExpenseDTO {
     private Long amount;
     private Long type;
     private Date date;
+    private Long balance;
 
     public ExpenseDTO() {
     }

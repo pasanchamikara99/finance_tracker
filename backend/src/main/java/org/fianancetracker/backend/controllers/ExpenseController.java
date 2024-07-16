@@ -49,4 +49,16 @@ public class ExpenseController {
         }
     }
 
+    @GetMapping("/getBalance/{username}")
+    @ResponseBody
+    public ResponseEntity<ExpenseDTO> getBalance(@PathVariable("username") String username) {
+        log.info(this.getClass().getName() + "get Balance ");
+        ExpenseDTO expense = expenseService.getBalance(username);
+        if (expense.getBalance() == null) {
+            return new ResponseEntity<>(expense, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(expense, HttpStatus.OK);
+        }
+    }
+
 }
