@@ -23,6 +23,7 @@ const RegisterPage = () => {
       });
       if (response.status === 201) {
         setMessage("Registration successful!");
+        navigate("/");
       } else {
         setMessage("Registration failed. Please try again.");
       }

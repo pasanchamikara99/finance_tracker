@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +20,7 @@ const LoginPage = () => {
       });
       if (response.status === 201) {
         setMessage("Login successful!");
+        navigate("/home");
       } else {
         setMessage("Login failed. Please try again.");
       }
