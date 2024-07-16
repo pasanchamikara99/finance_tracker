@@ -1,3 +1,66 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+
+button {
+  cursor: pointer;
+}
+
+.doughnut {
+  margin-bottom: 20px;
+}
+
+.homeContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+}
+
+.buttons .addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid green;
+  color: green;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.buttons .minBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 2px solid #FF6384;
+  color: #FF6384;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.balance {
+  margin: 10px;
+  background-color: darkgreen;
+  padding: 5px;
+  color: white;
+  width: 100px;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+}

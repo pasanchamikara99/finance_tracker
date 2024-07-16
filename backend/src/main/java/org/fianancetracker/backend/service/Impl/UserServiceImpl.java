@@ -5,6 +5,7 @@ import org.fianancetracker.backend.models.User;
 import org.fianancetracker.backend.repository.UserRepository;
 import org.fianancetracker.backend.service.UserService;
 import org.fianancetracker.backend.util.MessageVarList;
+import org.fianancetracker.backend.webToken.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    JWTService jwtService = new JWTService();
+
 
     @Override
     public String registerUser(UserDTO userDTO) {
@@ -51,6 +55,8 @@ public class UserServiceImpl implements UserService {
                 return MessageVarList.INVALID_lOGIN;
             }
         }
-        return message;
+
+        userDTO.setFirstName(user.getUserName());
+        return jwtService.generateToken(userDTO);
     }
 }

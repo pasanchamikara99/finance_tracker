@@ -122,8 +122,8 @@ public class CategoryServiceImpl implements CategoryService {
                     .map(category -> new CategoryDTO(
                             category.getId(),
                             category.getDescription(),
-                            category.getUser().getUserName(),
-                            category.getType()))
+                            category.getType(),
+                            category.getUser().getUserName()))
                     .collect(Collectors.toList());
         }
 

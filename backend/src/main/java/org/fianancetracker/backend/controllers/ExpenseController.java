@@ -38,13 +38,14 @@ public class ExpenseController {
     }
 
     @GetMapping("/getAllExpenses/{username}")
+    @ResponseBody
     public ResponseEntity<List<ExpenseDTO>> getAllExpense(@PathVariable("username") String username) {
         log.info(this.getClass().getName() + "get All Expense");
         List<ExpenseDTO> expense = expenseService.getAllExpense(username);
         if (expense.isEmpty()) {
             return new ResponseEntity<>(expense, HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(expense, HttpStatus.FOUND);
+            return new ResponseEntity<>(expense, HttpStatus.OK);
         }
     }
 
