@@ -12,9 +12,9 @@ import java.util.List;
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
-    @Query("SELECT E FROM Expense E WHERE E.user.userName = :username AND E.date BETWEEN :startDate AND :endDate")
-    List<Expense> findExpenseByMonth(
-            @Param("username") String username,
+    @Query("SELECT E.type.description, SUM(E.amount) FROM Expense E WHERE E.user.email = :email AND E.date BETWEEN :startDate AND :endDate AND E.type.type = 'Expence' GROUP BY E.type")
+    List<Object[]> findExpenseByMonth(
+            @Param("email") String email,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate
     );

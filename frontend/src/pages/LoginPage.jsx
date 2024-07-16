@@ -20,6 +20,7 @@ const LoginPage = () => {
       });
       if (response.status === 201) {
         setMessage("Login successful!");
+        localStorage.setItem("email", email);
         navigate("/home");
       } else {
         setMessage("Login failed. Please try again.");

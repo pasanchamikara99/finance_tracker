@@ -18,10 +18,8 @@ public class JWTService {
 
     public String generateToken(UserDTO userDTO) {
         Map<String, String> claims = new HashMap<>();
-        claims.put("name", "pasan");
 
         return Jwts.builder()
-                .claims(claims)
                 .subject(userDTO.getFirstName())
                 .issuedAt(Date.from(Instant.now()))
                 .expiration(Date.from(Instant.now().plusMillis(VALIDATY)))

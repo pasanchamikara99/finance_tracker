@@ -100,7 +100,7 @@ public class CategoryController {
 
     @GetMapping("/getCategoryByType/{type}")
     @ResponseBody
-    public ResponseEntity<List<CategoryDTO>> deteleCategory(@PathVariable("type") String type) {
+    public ResponseEntity<List<CategoryDTO>> getCategory(@PathVariable("type") String type) {
         log.info(this.getClass().getName() + "Get Category by types");
         List<CategoryDTO> category = null;
 

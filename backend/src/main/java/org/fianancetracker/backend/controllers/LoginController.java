@@ -46,10 +46,13 @@ public class LoginController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         message = userService.loginUser(userDTO);
-        if (message.isEmpty()) {
-            return new ResponseEntity<>(jwtService.generateToken(userDTO), HttpStatus.CREATED);
+
+        if (message.equals(MessageVarList.NO_USER) || message.equals(MessageVarList.INVALID_lOGIN)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(message);
+        }else{
+            return ResponseEntity.status(HttpStatus.CREATED).body(message);
         }
-        return new ResponseEntity<>(message, HttpStatus.BAD_GATEWAY);
+
     }
 
 
