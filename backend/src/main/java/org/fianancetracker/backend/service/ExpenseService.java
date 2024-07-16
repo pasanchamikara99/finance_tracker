@@ -12,4 +12,6 @@ public interface ExpenseService {
 
     List<ExpenseDTO> getAllExpense(String username);
 
+    ExpenseDTO getBalance(String username);
+
 }

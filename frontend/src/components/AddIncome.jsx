@@ -144,6 +144,7 @@ const AddIncome = () => {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             style={styles.input}
+            placeholder="Rs."
             required
           />
         </div>

@@ -10,9 +10,9 @@ const HomePage = () => {
 
   const [btn, setBtn] = useState(false);
   const [username, setUserName] = useState(localStorage.getItem("username"));
-
   const [amount, setAmount] = useState([]);
   const [labels, setLabels] = useState([]);
+  const [balance, setBalance] = useState(0);
 
   const data = {
     labels: labels,
@@ -26,36 +26,54 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const getAllExpense = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/expense/getAllExpenses/` + username
-        );
-        if (response.status == 200) {
-          const amounts = response.data.map((expense) => expense.amount);
-          const labels = response.data.map(
-            (expense) => expense.typeDescription
-          );
-          setAmount(amounts);
-          setLabels(labels);
-        } else {
-          console.log(response);
-        }
-      } catch (error) {
-        console.error("There was an error registering!", error.response.data);
-        setMessage(error.response.data);
-      }
-    };
-
     getAllExpense();
-  });
+    getBalance();
+  }, []);
 
+  const getAllExpense = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/expense/getAllExpenses/` + username
+      );
+      if (response.status == 200) {
+        const amounts = response.data.map((expense) => expense.amount);
+        const labels = response.data.map((expense) => expense.typeDescription);
+        setAmount(amounts);
+        setLabels(labels);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("There was an error registering!", error.response.data);
+      setMessage(error.response.data);
+    }
+  };
+
+  const getBalance = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/expense/getBalance/` + username
+      );
+      if (response.status == 200) {
+        setBalance(response.data.balance);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("There was an error registering!", error.response.data);
+      setMessage(error.response.data);
+    }
+  };
   const addIncome = () => {
     setBtn(false);
+
+    getAllExpense();
   };
 
   const addExpense = () => {
     setBtn(true);
+
+    getAllExpense();
   };
 
   return (
@@ -69,7 +87,12 @@ const HomePage = () => {
           <button className="addBtn" onClick={() => addIncome()}>
             +
           </button>
-          <label className="balance">Balance</label>
+          <label
+            className="balance"
+            style={{ backgroundColor: balance > 0 ? "green" : "red" }}
+          >
+            Rs. {balance}.00
+          </label>
           <button className="minBtn" onClick={() => addExpense()}>
             -
           </button>

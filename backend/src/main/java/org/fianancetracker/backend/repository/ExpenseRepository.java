@@ -18,4 +18,11 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate
     );
+
+    @Query("SELECT E.type.type, SUM(E.amount) FROM Expense E WHERE E.user.email = :email AND E.date BETWEEN :startDate AND :endDate AND E.type.type = 'Income' GROUP BY E.type.type")
+    List<Object[]> findIncomeByMonth(
+            @Param("email") String email,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate
+    );
 }

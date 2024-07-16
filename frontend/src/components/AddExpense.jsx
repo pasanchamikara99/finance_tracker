@@ -145,6 +145,7 @@ const AddExpense = () => {
             onChange={(e) => setAmount(e.target.value)}
             style={styles.input}
             required
+            placeholder="Rs."
           />
         </div>
         <button
