@@ -7,13 +7,14 @@ import org.fianancetracker.backend.repository.CategoryRepository;
 import org.fianancetracker.backend.repository.ExpenseRepository;
 import org.fianancetracker.backend.service.CommonService;
 import org.fianancetracker.backend.service.ExpenseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
@@ -57,6 +58,29 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
 
         return message;
+    }
+
+    @Override
+    public List<ExpenseDTO> getAllExpense(String username) {
+
+        LocalDate startDate = LocalDate.of(2024, 1, 15);
+        LocalDate endDate = LocalDate.of(2024, 8, 30);
+
+        List<Expense> expenseList = expenseRepository.findExpenseByMonth(username , startDate,endDate);
+
+        if (!expenseList.isEmpty()) {
+            return expenseList.stream()
+                    .map(expense -> new ExpenseDTO(
+                            expense.getId(),
+                            expense.getDescription(),
+                            expense.getUser().getUserName(),
+                            expense.getAmount(),
+                            expense.getType().getId()))
+                    .collect(Collectors.toList());
+        }
+
+        return new ArrayList<>();
+
     }
 
 }

@@ -49,7 +49,7 @@ public class LoginController {
         if (message.isEmpty()) {
             return new ResponseEntity<>(jwtService.generateToken(userDTO), HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_GATEWAY);
     }
 
 
