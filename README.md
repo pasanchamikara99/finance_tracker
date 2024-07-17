@@ -23,7 +23,7 @@ ___
 #### Getting Started
 
 + Node.js and npm installed on your machine
-+ Java Development Kit (JDK) 17 installe
++ Java Development Kit (JDK) 17 install
 + MySQL database installed and running
 + Maven installed
 
