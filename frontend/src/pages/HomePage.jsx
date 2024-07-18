@@ -28,7 +28,7 @@ const HomePage = () => {
   useEffect(() => {
     getAllExpense();
     getBalance();
-  }, []);
+  }, [amount]);
 
   const getAllExpense = async () => {
     try {
@@ -64,6 +64,7 @@ const HomePage = () => {
       setMessage(error.response.data);
     }
   };
+
   const addIncome = () => {
     setBtn(false);
 
@@ -74,6 +75,10 @@ const HomePage = () => {
     setBtn(true);
 
     getAllExpense();
+  };
+
+  const viewAllExpenses = () => {
+    console.log("View All");
   };
 
   return (
@@ -90,6 +95,7 @@ const HomePage = () => {
           <label
             className="balance"
             style={{ backgroundColor: balance > 0 ? "green" : "red" }}
+            onClick={() => viewAllExpenses()}
           >
             Rs. {balance}.00
           </label>
